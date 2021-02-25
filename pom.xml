@@ -41,6 +41,14 @@
       <scope>test</scope>
     </dependency>
 
+    <!--To run both Junit 4 and 5 tests together-->
+    <dependency>
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
+      <version>${junit5.version}</version>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
 
   <build>
