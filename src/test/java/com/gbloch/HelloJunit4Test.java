@@ -6,7 +6,7 @@ import static org.junit.Assert.assertEquals;
 
 public class HelloJunit4Test {
     @Test
-    public void testHello() {
+    public void getHello() {
         assertEquals(new Hello().getHello(), "Hello");
     }
 }
