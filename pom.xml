@@ -21,6 +21,7 @@
     <javadoc.version>3.2.0</javadoc.version>
     <pmd.version>3.14.0</pmd.version>
     <skipTests>false</skipTests>
+    <skipITs>false</skipITs>
 
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
