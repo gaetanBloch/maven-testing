@@ -1,2 +1,2 @@
 # maven-testing
-All about handling tests with Maven
+All about handling tests and quality tools with Maven
