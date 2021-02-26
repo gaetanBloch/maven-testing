@@ -14,12 +14,12 @@
     <java.version>11</java.version>
     <junit5.version>5.8.0-M1</junit5.version>
     <surefire.version>3.0.0-M5</surefire.version>
+    <jacoco.version>0.8.6</jacoco.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
   </properties>
 
   <dependencies>
-
     <!--Junit 4-->
     <dependency>
       <groupId>junit</groupId>
@@ -84,6 +84,9 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${surefire.version}</version>
+        <configuration>
+          <argLine>${surefireArgLine}</argLine>
+        </configuration>
       </plugin>
 
       <!--Groovy-->
@@ -124,6 +127,10 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
         <version>3.0.0-M5</version>
+        <configuration>
+          <!-- Sets the VM argument line used when integration tests are run. -->
+          <argLine>${failsafeArgLine}</argLine>
+        </configuration>
         <executions>
           <execution>
             <goals>
@@ -134,17 +141,107 @@
         </executions>
       </plugin>
 
+      <!--JaCoCo plugin-->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.version}</version>
+        <executions>
+
+          <!--Unit tests-->
+          <execution>
+            <id>pre-unit-test</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+            <configuration>
+              <destFile>
+                ${project.build.directory}/coverage-reports/jacoco-ut.exec
+              </destFile>
+              <propertyName>surefireArgLine</propertyName>
+            </configuration>
+          </execution>
+          <execution>
+            <id>post-unit-test</id>
+            <phase>test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+            <configuration>
+              <dataFile>
+                ${project.build.directory}/coverage-reports/jacoco-ut.exec
+              </dataFile>
+              <outputDirectory>
+                ${project.reporting.outputDirectory}/jacoco-ut
+              </outputDirectory>
+            </configuration>
+          </execution>
+
+          <!--Integration tests-->
+          <execution>
+            <id>pre-integration-test</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+            <configuration>
+              <destFile>
+                ${project.build.directory}/coverage-reports/jacoco-it.exec
+              </destFile>
+              <propertyName>failsafeArgLine</propertyName>
+            </configuration>
+          </execution>
+          <execution>
+            <id>post-integration-test</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+            <configuration>
+              <dataFile>
+                ${project.build.directory}/coverage-reports/jacoco-it.exec
+              </dataFile>
+              <outputDirectory>
+                ${project.reporting.outputDirectory}/jacoco-it
+              </outputDirectory>
+            </configuration>
+          </execution>
+
+        </executions>
+      </plugin>
+
     </plugins>
   </build>
 
   <reporting>
     <plugins>
 
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>3.1.1</version>
+      </plugin>
+
       <!--Surefire report-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-report-plugin</artifactId>
         <version>${surefire.version}</version>
+      </plugin>
+
+      <!--JaCoCo report-->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.version}</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <!-- select non-aggregate reports -->
+              <report>report</report>
+            </reports>
+          </reportSet>
+        </reportSets>
       </plugin>
 
     </plugins>
