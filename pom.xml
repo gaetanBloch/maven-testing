@@ -15,6 +15,7 @@
     <junit5.version>5.8.0-M1</junit5.version>
     <surefire.version>3.0.0-M5</surefire.version>
     <jacoco.version>0.8.6</jacoco.version>
+    <spotbugs.version>4.2.0</spotbugs.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
   </properties>
@@ -210,6 +211,13 @@
         </executions>
       </plugin>
 
+      <!--SpotBugs plugin-->
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>${spotbugs.version}</version>
+      </plugin>
+
     </plugins>
   </build>
 
@@ -242,6 +250,13 @@
             </reports>
           </reportSet>
         </reportSets>
+      </plugin>
+
+      <!--SpotBugs report-->
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>${spotbugs.version}</version>
       </plugin>
 
     </plugins>
