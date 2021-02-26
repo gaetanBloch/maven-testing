@@ -7,6 +7,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class HelloJunit5Test {
     @Test
     void getHello() {
-        assertEquals(new Hello().getHello(), "Hello");
+        // Given
+        Hello hello = new Hello();
+
+        // When
+        String result = hello.getHello();
+
+        // Then
+        assertEquals(result, "Hello");
     }
 }
