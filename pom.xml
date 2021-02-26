@@ -13,6 +13,7 @@
     <project.report.outputEncoding>UTF-8</project.report.outputEncoding>
     <java.version>11</java.version>
     <junit5.version>5.8.0-M1</junit5.version>
+    <surefire.version>3.0.0-M5</surefire.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
   </properties>
@@ -82,7 +83,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M5</version>
+        <version>${surefire.version}</version>
       </plugin>
 
       <!--Groovy-->
@@ -111,8 +112,28 @@
         </dependencies>
       </plugin>
 
+      <!--Site plugin-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.9.1</version>
+      </plugin>
+
     </plugins>
   </build>
+
+  <reporting>
+    <plugins>
+
+      <!--Surefire report-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <version>${surefire.version}</version>
+      </plugin>
+
+    </plugins>
+  </reporting>
 
 </project>
 
