@@ -1,6 +1,11 @@
 package com.gbloch;
 
-public class Hello {
+public final class Hello {
+    /**
+     * Get the "Hello" string.
+     *
+     * @return the "Hello" string
+     */
     public String getHello() {
         return "Hello";
     }
