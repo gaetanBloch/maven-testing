@@ -80,7 +80,6 @@
             <indy/>
             <configScript>config.groovy</configScript>
           </compilerArguments>
-          <failOnWarning>true</failOnWarning>
         </configuration>
         <dependencies>
           <dependency>
