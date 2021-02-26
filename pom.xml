@@ -11,12 +11,16 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.report.outputEncoding>UTF-8</project.report.outputEncoding>
+
     <java.version>11</java.version>
     <junit5.version>5.8.0-M1</junit5.version>
     <surefire.version>3.0.0-M5</surefire.version>
     <jacoco.version>0.8.6</jacoco.version>
     <spotbugs.version>4.2.0</spotbugs.version>
     <checkstyle.version>3.1.2</checkstyle.version>
+    <javadoc.version>3.2.0</javadoc.version>
+    <pmd.version>3.14.0</pmd.version>
+
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
   </properties>
@@ -230,7 +234,14 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-pmd-plugin</artifactId>
-        <version>3.14.0</version>
+        <version>${pmd.version}</version>
+      </plugin>
+
+      <!--Javadoc plugin-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>${javadoc.version}</version>
       </plugin>
 
     </plugins>
@@ -288,11 +299,18 @@
         </reportSets>
       </plugin>
 
-      <!--PMD report-->
+      <!--PMD and CPD reports-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-pmd-plugin</artifactId>
-        <version>3.14.0</version>
+        <version>${pmd.version}</version>
+      </plugin>
+
+      <!--Javadoc report-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>${javadoc.version}</version>
       </plugin>
 
     </plugins>
